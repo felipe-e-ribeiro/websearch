@@ -22,4 +22,4 @@ jobs:
         run: |
           docker buildx build \
             --tag ${{ secrets.DOCKER_USERNAME }}/websearch:latest \
-            --platform linux/amd64,linux/arm/v7,linux/arm64 .
+            --pull --platform linux/amd64,linux/arm/v7,linux/arm64 .
