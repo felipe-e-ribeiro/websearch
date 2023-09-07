@@ -1,8 +1,9 @@
-ame: build our image
+name: build our image
 
 on:
   push:
-    branches: master
+    branches:
+      - main
 
 jobs:
   build:
@@ -10,13 +11,15 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v2
+
       - name: install buildx
         id: buildx
         uses: crazy-max/ghaction-docker-buildx@v1
         with:
           version: latest
+
       - name: build the image
-      run: |
-        docker buildx build \
-          --tag ${{ secrets.DOCKER_USERNAME }}/websearch:latest \
-          --platform linux/amd64,linux/arm/v7,linux/arm64 .
+        run: |
+          docker buildx build \
+            --tag ${{ secrets.DOCKER_USERNAME }}/multiarch-example:latest \
+            --platform linux/amd64,linux/arm/v7,linux/arm64 .
